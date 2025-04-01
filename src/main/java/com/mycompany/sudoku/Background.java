@@ -7,15 +7,17 @@ package com.mycompany.sudoku;
 import java.util.ArrayList;
 
 /**
- *This Class is The Backend for the game and will not bee seen by the Player it contains most of the logic
+ * This Class is The Backend for the game and will not bee seen by the Player it
+ * contains most of the logic
+ *
  * @author schne
-*/
+ */
 public class Background {
 
     private ArrayList<Integer>[][] background;
 
     /**
-     *Initializes The Bsackground Class and Creates The background Array
+     * Initializes The Bsackground Class and Creates The background Array
      */
     public Background() {
         this.background = new ArrayList[9][9];
@@ -57,15 +59,12 @@ public class Background {
      * @param y The Vertical Position of the Cell to be Cleared
      */
     public void resetCell(int x, int y) {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                background[i][j].clear();
-            }
-        }
+        background[x][y].clear();
     }
 
     /**
-     *Delets a given Value from a entire Row
+     * Delets a given Value from a entire Row
+     *
      * @param value the Value that will be Deletet from the entire row
      * @param row the row that will have the given Value removed
      */
@@ -76,7 +75,8 @@ public class Background {
     }
 
     /**
-     *Delets a given Value from a entire Column
+     * Delets a given Value from a entire Column
+     *
      * @param value the Value that will be Deletet from the entire Column
      * @param Column the Column that will have the given Value removed
      */
@@ -87,9 +87,10 @@ public class Background {
     }
 
     /**
-     *Delets a given Value from a entire Quadrant
+     * Delets a given Value from a entire Quadrant
+     *
      * @param value the Value that will be Deletet from the entire Quadrant
-     * @param quadrant  the Quadrant that will have the given Value removed
+     * @param quadrant the Quadrant that will have the given Value removed
      */
     public void deleteValueFromQuadrant(int value, int quadrant) {
         int y = 0;
@@ -139,8 +140,32 @@ public class Background {
         }
     }
 
+    public void findLonleyNumber(Gamefield gf) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (background[i][j].size() == 1) {
+                    gf.insertNumber(background[i][j].get(0), i, j);
+                    resetCell(i, j);
+                }
+            }
+        }
+    }
+
+    public void FindUniqueNumberHorizontally(int value, int row, Gamefield gf) {
+        int[] numberCount = new int[9];
+        for (int i = 0; i < 9; i++) {
+            for(int j= 1;j<background[row][i].size()+1;j++){
+                numberCount[background[row][i].get(j-1)-1]++;
+            }
+        }
+        
+        for (int i = 0; i < 9; i++) {
+            System.out.println("NC: "+numberCount[i]);
+        }
+    }
+
     /**
-     * 
+     *
      * @return Returns the Array as a String
      */
     @Override
