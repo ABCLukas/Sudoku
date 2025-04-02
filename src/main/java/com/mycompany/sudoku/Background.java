@@ -90,77 +90,82 @@ public class Background {
      * Delets a given Value from a entire Quadrant
      *
      * @param value the Value that will be Deletet from the entire Quadrant
-     * @param quadrant the Quadrant that will have the given Value removed
+     * @param eingabex the Quadrant that will have the given Value removed
+     * @param eingabey
      */
-    public void deleteValueFromQuadrant(int value, int quadrant) {
-        int y = 0;
-        int x = 0;
-        switch (quadrant) {
-            case 1 -> {
-                y = 1;
-                x = 1;
-            }
-            case 2 -> {
-                y = 4;
-                x = 1;
-            }
-            case 3 -> {
-                y = 8;
-                x = 1;
-            }
-            case 4 -> {
-                y = 1;
-                x = 4;
-            }
-            case 5 -> {
-                y = 4;
-                x = 4;
-            }
-            case 6 -> {
-                y = 8;
-                x = 4;
-            }
-            case 7 -> {
-                y = 1;
-                x = 8;
-            }
-            case 8 -> {
-                y = 4;
-                x = 8;
-            }
-            case 9 -> {
-                y = 8;
-                x = 8;
-            }
+    public void deleteValueFromQuadrant(int value, int eingabex, int eingabey) {
+        int outputy = 0;
+        int outputx = 0;
+
+        if (eingabex >= 0 && eingabex <= 2 && eingabey >= 0 && eingabey <= 2) {
+            outputy = 1;
+            outputx = 1;
+        } else if (eingabex >= 3 && eingabex <= 5 && eingabey >= 0 && eingabey <= 2) {
+            outputy = 1;
+            outputx = 4;
+        } else if (eingabex >= 6 && eingabex <= 8 && eingabey >= 0 && eingabey <= 2) {
+            outputy = 1;
+            outputx = 8;
+        } else if (eingabex >= 0 && eingabex <= 2 && eingabey >= 3 && eingabey <= 5) {
+            outputy = 4;
+            outputx = 1;
+        } else if (eingabex >= 3 && eingabex <= 5 && eingabey >= 3 && eingabey <= 5) {
+            outputy = 4;
+            outputx = 4;
+        } else if (eingabex >= 6 && eingabex <= 8 && eingabey >= 3 && eingabey <= 5) {
+            outputy = 4;
+            outputx = 8;
+        } else if (eingabex >= 0 && eingabex <= 2 && eingabey >= 6 && eingabey <= 8) {
+            outputy = 8;
+            outputx = 1;
+        } else if (eingabex >= 3 && eingabex <= 5 && eingabey >= 6 && eingabey <= 8) {
+            outputy = 8;
+            outputx = 4;
+        } else if (eingabex >= 6 && eingabex <= 8 && eingabey >= 6 && eingabey <= 8) {
+            outputy = 8;
+            outputx = 8;
         }
-        for (int i = x - 1; i <= x + 1; i++) {
-            for (int j = y - 1; j <= y + 1; j++) {
+
+        for (int i = outputx - 1; i <= outputx + 1; i++) {
+            for (int j = outputy - 1; j <= outputy + 1; j++) {
                 deleteValue(value, i, j);
             }
         }
     }
 
+    /**
+     * OVERWRITE Method to find if a value in standing alone in the eintire
+     * Backend Field
+     *
+     * @param gf The Gamefield that will be edited
+     */
     public void findLonleyNumber(Gamefield gf) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (background[i][j].size() == 1) {
-                    gf.insertNumber(background[i][j].get(0), i, j);
+//                    gf.insertNumber(background[i][j].get(0), i, j);
                     resetCell(i, j);
                 }
             }
         }
     }
 
-    public void FindUniqueNumberHorizontally(int value, int row, Gamefield gf) {
-        int[] numberCount = new int[9];
+    /**
+     * Finds Unique Values in a Row and
+     *
+     * @param gf
+     */
+    public void spielfeldScanner(Gamefield gf) {
+
         for (int i = 0; i < 9; i++) {
-            for(int j= 1;j<background[row][i].size()+1;j++){
-                numberCount[background[row][i].get(j-1)-1]++;
+            for (int j = 0; j < 9; j++) {
+                if (gf.getValOnField(i, j) != 0) {
+                    deleteFromRow(gf.getValOnField(i, j), i);
+                    deleteFromColumn(gf.getValOnField(i, j), j);
+                    deleteValueFromQuadrant(gf.getValOnField(i, j), i, j);
+                    resetCell(i, j);//WORKING
+                }
             }
-        }
-        
-        for (int i = 0; i < 9; i++) {
-            System.out.println("NC: "+numberCount[i]);
         }
     }
 
@@ -174,9 +179,9 @@ public class Background {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 for (int k = 0; k < background[i][j].size(); k++) {
-                    res += background[i][j].get(k);
+                    res += background[i][j].get(k) +",";
                 }
-                res += "\t";
+                res += " | ";
             }
             res += "\n";
         }

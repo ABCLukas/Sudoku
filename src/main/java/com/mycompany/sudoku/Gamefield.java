@@ -38,6 +38,10 @@ public class Gamefield {
         }
     }
 
+    public int getValOnField(int x,int y){
+        return gamefield[x][y];
+    }
+    
     /**
      *
      * @return Returns The Array as a String
