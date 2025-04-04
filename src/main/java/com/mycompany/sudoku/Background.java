@@ -43,12 +43,8 @@ public class Background {
      */
     public void deleteValue(int value, int x, int y) {
         if (x >= 0 && y >= 0 && x < 9 && y < 9) {
-            for (int i = 0; i < background[x][y].size(); i++) {
-                if (background[x][y].get(i) == value) {
-                    background[x][y].remove(i);
-                    break;
-                }
-            }
+            Integer i = value;
+            background[x][y].remove(i);
         }
     }
 
@@ -97,6 +93,8 @@ public class Background {
         int outputy = 0;
         int outputx = 0;
 
+        //int quadrant = (Z/3)*3+(S/3);
+        
         if (eingabex >= 0 && eingabex <= 2 && eingabey >= 0 && eingabey <= 2) {
             outputy = 1;
             outputx = 1;
@@ -159,11 +157,11 @@ public class Background {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (gf.getValOnField(i, j) != 0) {
-                    deleteFromRow(gf.getValOnField(i, j), i);
-                    deleteFromColumn(gf.getValOnField(i, j), j);
+                if (gf.getValOnField(i, j) > 0) {
+                    deleteFromRow(gf.getValOnField(i, j), j);
+                    deleteFromColumn(gf.getValOnField(i, j), i);
                     deleteValueFromQuadrant(gf.getValOnField(i, j), i, j);
-                    resetCell(i, j);//WORKING
+                    resetCell(i, j);
                 }
             }
         }
@@ -179,7 +177,7 @@ public class Background {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 for (int k = 0; k < background[i][j].size(); k++) {
-                    res += background[i][j].get(k) +",";
+                    res += background[i][j].get(k) + ",";
                 }
                 res += " | ";
             }

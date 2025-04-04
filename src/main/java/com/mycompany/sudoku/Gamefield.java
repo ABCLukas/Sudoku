@@ -35,6 +35,8 @@ public class Gamefield {
     public void insertNumber(int value, int x, int y) {
         if (x >= 0 && y >= 0 && x < 9 && y < 9) {
             gamefield[x][y] = value;
+        }else{
+        System.out.println("OUT OFF BOUNDS X:"+x+"Y:"+y);
         }
     }
 
