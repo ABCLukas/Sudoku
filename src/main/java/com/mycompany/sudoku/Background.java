@@ -132,7 +132,7 @@ public class Background {
     }
 
     /**
-     * OVERWRITE Method to find if a value in standing alone in the eintire
+     *  Method to find if a value in standing alone in the Array and if add to Gamefield
      * Backend Field
      *
      * @param gf The Gamefield that will be edited
@@ -141,7 +141,7 @@ public class Background {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (background[i][j].size() == 1) {
-//                    gf.insertNumber(background[i][j].get(0), i, j);
+                    gf.insertNumber(background[i][j].get(0), i, j);
                     resetCell(i, j);
                 }
             }
