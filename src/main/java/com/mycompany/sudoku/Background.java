@@ -66,7 +66,7 @@ public class Background {
      */
     public void deleteFromRow(int value, int row) {
         for (int i = 0; i < 9; i++) {
-            deleteValue(value, i, row);
+            deleteValue(value, row, i);
         }
     }
 
@@ -78,7 +78,7 @@ public class Background {
      */
     public void deleteFromColumn(int value, int Column) {
         for (int i = 0; i < 9; i++) {
-            deleteValue(value, Column, i);
+            deleteValue(value, i, Column);
         }
     }
 
@@ -94,7 +94,6 @@ public class Background {
         int outputx = 0;
 
         //int quadrant = (Z/3)*3+(S/3);
-        
         if (eingabex >= 0 && eingabex <= 2 && eingabey >= 0 && eingabey <= 2) {
             outputy = 1;
             outputx = 1;
@@ -132,8 +131,8 @@ public class Background {
     }
 
     /**
-     *  Method to find if a value in standing alone in the Array and if add to Gamefield
-     * Backend Field
+     * Method to find if a value in standing alone in the Array and if add to
+     * Gamefield Backend Field
      *
      * @param gf The Gamefield that will be edited
      */
@@ -149,19 +148,119 @@ public class Background {
     }
 
     /**
-     * Finds Unique Values in a Row and
+     * Finds Unique values in and removes them from the row and column
      *
      * @param gf
      */
-    public void spielfeldScanner(Gamefield gf) {
+    public void gamefieldScanner(Gamefield gf) {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (gf.getValOnField(i, j) > 0) {
-                    deleteFromRow(gf.getValOnField(i, j), j);
-                    deleteFromColumn(gf.getValOnField(i, j), i);
+                    deleteFromRow(gf.getValOnField(i, j), i);
+                    deleteFromColumn(gf.getValOnField(i, j), j);
                     deleteValueFromQuadrant(gf.getValOnField(i, j), i, j);
                     resetCell(i, j);
+                }
+            }
+        }
+    }
+
+    public void findHorizontalUniqueNumbers(Gamefield gf, int row) {
+        int[] numberListCounter = new int[9];
+        //Count Unique numbers
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; i < background[row][i].size(); i++) {
+                numberListCounter[background[row][i].get(j)]++;
+            }
+        }
+
+        for (int i = 0; i < 9; i++) {
+            if (numberListCounter[i] == 1) {
+                for (int j = 0; j < 9; j++) {
+                    if (background[row][j].contains(numberListCounter[i])) {
+                        gf.insertNumber(numberListCounter[i], row, j);
+                        resetCell(row, j);
+                    }
+                }
+            }
+        }
+    }
+
+    public void findVerticalUniqueNumbers(Gamefield gf, int column) {
+        int[] numberListCounter = new int[9];
+        //Count Unique numbers
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; i < background[i][column].size(); i++) {
+                numberListCounter[background[i][column].get(j)]++;
+            }
+        }
+
+        for (int i = 0; i < 9; i++) {
+            if (numberListCounter[i] == 1) {
+                for (int j = 0; j < 9; j++) {
+                    if (background[j][column].contains(numberListCounter[i])) {
+                        gf.insertNumber(numberListCounter[i], j, column);
+                        resetCell(j, column);
+                    }
+                }
+            }
+        }
+    }
+
+    public void findQuadrantUniqueNumbers(Gamefield gf, int eingabex, int eingabey) {
+        int outputy = 0;
+        int outputx = 0;
+
+        //int quadrant = (Z/3)*3+(S/3);
+        if (eingabex >= 0 && eingabex <= 2 && eingabey >= 0 && eingabey <= 2) {
+            outputy = 1;
+            outputx = 1;
+        } else if (eingabex >= 3 && eingabex <= 5 && eingabey >= 0 && eingabey <= 2) {
+            outputy = 1;
+            outputx = 4;
+        } else if (eingabex >= 6 && eingabex <= 8 && eingabey >= 0 && eingabey <= 2) {
+            outputy = 1;
+            outputx = 8;
+        } else if (eingabex >= 0 && eingabex <= 2 && eingabey >= 3 && eingabey <= 5) {
+            outputy = 4;
+            outputx = 1;
+        } else if (eingabex >= 3 && eingabex <= 5 && eingabey >= 3 && eingabey <= 5) {
+            outputy = 4;
+            outputx = 4;
+        } else if (eingabex >= 6 && eingabex <= 8 && eingabey >= 3 && eingabey <= 5) {
+            outputy = 4;
+            outputx = 8;
+        } else if (eingabex >= 0 && eingabex <= 2 && eingabey >= 6 && eingabey <= 8) {
+            outputy = 8;
+            outputx = 1;
+        } else if (eingabex >= 3 && eingabex <= 5 && eingabey >= 6 && eingabey <= 8) {
+            outputy = 8;
+            outputx = 4;
+        } else if (eingabex >= 6 && eingabex <= 8 && eingabey >= 6 && eingabey <= 8) {
+            outputy = 8;
+            outputx = 8;
+        }
+
+        int[] numberListCounter = new int[9];
+
+        for (int i = outputx - 1; i <= outputx + 1; i++) {
+            for (int j = outputy - 1; j <= outputy + 1; j++) {
+                for (int k = 0; k < background[i][j].size(); i++) {
+                    numberListCounter[background[i][j].get(k)]++;
+                }
+            }
+        }
+
+        for (int i = 0; i < 9; i++) {
+            if (numberListCounter[i] == 1) {
+                for (int k = outputx - 1; k <= outputx + 1; k++) {
+                    for (int h = outputy - 1; h <= outputy + 1; h++) {
+                        if (background[k][h].contains(numberListCounter[i])) {
+                            gf.insertNumber(numberListCounter[i], k, h);
+                            resetCell(k, h);
+                        }
+                    }
                 }
             }
         }
