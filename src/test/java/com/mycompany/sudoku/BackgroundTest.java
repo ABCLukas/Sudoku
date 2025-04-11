@@ -21,42 +21,42 @@ public class BackgroundTest {
     /**
      * Test of deleteValue method, of class Background.
      */
-//    @Test
-//    public void testDeleteValue() {
-//        for (int i = 0; i < 9; i++) {
-//            for (int j = 0; j < 9; j++) {
-//                for (int k = 1; k < 10; k++) {
-//                    bg.deleteValue(k, i, j);
-//                }
-//            }
-//        }
-//        Assertions.assertTrue(!bg.toString().contains("1"));
-////        System.out.println(bg.toString());
-//    }
-//
-//    @Test
-//    public void testDeleteQuadrant() {
-//        bg.deleteValueFromQuadrant(3, 2,2);
-////        System.out.println(bg.toString());
-//    }
-//    
-//    @Test
-//    public void findLonleyNumberTest(){
-//        Gamefield gf = new Gamefield();
-//        bg.deleteValue(1, 0, 0);
-//        bg.deleteValue(8, 0, 0);
-//        bg.deleteValue(7, 0, 0);
-//        bg.deleteValue(6, 0, 0);
-//        bg.deleteValue(5, 0, 0);
-//        bg.deleteValue(4, 0, 0);
-//        bg.deleteValue(3, 0, 0);
-//        bg.deleteValue(2, 0, 0);
-//
-//        bg.findLonleyNumber(gf);
+    @Test
+    public void testDeleteValue() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                for (int k = 1; k < 10; k++) {
+                    bg.deleteValue(k, i, j);
+                }
+            }
+        }
+        Assertions.assertTrue(!bg.toString().contains("1"));
 //        System.out.println(bg.toString());
-//        System.out.println(gf.toString());
-//    }
-//    
+    }
+
+    @Test
+    public void testDeleteQuadrant() {
+        bg.deleteValueFromQuadrant(3, 2,2);
+//        System.out.println(bg.toString());
+    }
+    
+    @Test
+    public void findLonleyNumberTest(){
+        Gamefield gf = new Gamefield();
+        bg.deleteValue(1, 0, 0);
+        bg.deleteValue(8, 0, 0);
+        bg.deleteValue(7, 0, 0);
+        bg.deleteValue(6, 0, 0);
+        bg.deleteValue(5, 0, 0);
+        bg.deleteValue(4, 0, 0);
+        bg.deleteValue(3, 0, 0);
+        bg.deleteValue(2, 0, 0);
+
+        bg.findLonleyNumber(gf);
+        System.out.println(bg.toString());
+        System.out.println(gf.toString());
+    }
+    
     @Test
     public void spielfeldScannerTest() {
         Gamefield spf = new Gamefield();
