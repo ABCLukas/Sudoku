@@ -36,12 +36,12 @@ public class BackgroundTest {
 
     @Test
     public void testDeleteQuadrant() {
-        bg.deleteValueFromQuadrant(3, 2,2);
+        bg.deleteValueFromQuadrant(3, 2, 2);
 //        System.out.println(bg.toString());
     }
-    
+
     @Test
-    public void findLonleyNumberTest(){
+    public void findLonleyNumberTest() {
         Gamefield gf = new Gamefield();
         bg.deleteValue(1, 0, 0);
         bg.deleteValue(8, 0, 0);
@@ -56,7 +56,7 @@ public class BackgroundTest {
         System.out.println(bg.toString());
         System.out.println(gf.toString());
     }
-    
+
     @Test
     public void spielfeldScannerTest() {
         Gamefield spf = new Gamefield();
@@ -100,15 +100,14 @@ public class BackgroundTest {
         spf.insertNumber(3, 8, 2);
         spf.insertNumber(4, 8, 5);
 
-        int iteration = 0;
-        while (spf.toString().contains("0")) {
-            iteration++;
-            System.out.println(spf.toString());
-            ma.gamefieldScanner(spf);
-            System.out.println(ma.toString());
-            ma.findLonleyNumber(spf);
-            System.out.println(spf.toString());
-            System.out.println("ITERATION: "+iteration);
-        }
+        System.out.println(spf.toString());
+        ma.gamefieldScanner(spf);
+        ma.findHorizontalUniqueNumbers(spf, 0);
+        System.out.println(ma.toString());
+        System.out.println(spf.toString());
+//        int iteration = 0;
+//        while (spf.toString().contains("0")) {
+//
+//        }
     }
 }

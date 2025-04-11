@@ -166,12 +166,12 @@ public class Background {
         }
     }
 
-    public void findHorizontalUniqueNumbers(Gamefield gf, int row) {
+    public void findVerticalUniqueNumbers(Gamefield gf, int row) {
         int[] numberListCounter = new int[9];
         //Count Unique numbers
         for (int i = 0; i < 9; i++) {
-            for (int j = 0; i < background[row][i].size(); i++) {
-                numberListCounter[background[row][i].get(j)]++;
+            for (int j = 0; j < background[row][i].size(); j++) {
+                numberListCounter[background[row][i].get(j)-1]++;
             }
         }
 
@@ -187,23 +187,24 @@ public class Background {
         }
     }
 
-    public void findVerticalUniqueNumbers(Gamefield gf, int column) {
+    public void findHorizontalUniqueNumbers(Gamefield gf, int column) {
         int[] numberListCounter = new int[9];
-        //Count Unique numbers
         for (int i = 0; i < 9; i++) {
-            for (int j = 0; i < background[i][column].size(); i++) {
-                numberListCounter[background[i][column].get(j)]++;
+            for (int j = 0; j < background[i][column].size(); j++) {
+                numberListCounter[background[i][column].get(j)-1]++;
             }
         }
 
         for (int i = 0; i < 9; i++) {
             if (numberListCounter[i] == 1) {
                 for (int j = 0; j < 9; j++) {
-                    if (background[j][column].contains(numberListCounter[i])) {
-                        gf.insertNumber(numberListCounter[i], j, column);
-                        resetCell(j, column);
+                    if (background[j][column].contains(i+1)) {
+                        gf.insertNumber(i+1, j, column);
+                        gamefieldScanner(gf);
+                        break;
                     }
                 }
+                break;
             }
         }
     }
