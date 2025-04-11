@@ -100,12 +100,15 @@ public class BackgroundTest {
         spf.insertNumber(3, 8, 2);
         spf.insertNumber(4, 8, 5);
 
-        for (int i = 0; i < 50; i++) {
+        int iteration = 0;
+        while (spf.toString().contains("0")) {
+            iteration++;
             System.out.println(spf.toString());
-            ma.spielfeldScanner(spf);
+            ma.gamefieldScanner(spf);
             System.out.println(ma.toString());
             ma.findLonleyNumber(spf);
             System.out.println(spf.toString());
+            System.out.println("ITERATION: "+iteration);
         }
     }
 }
