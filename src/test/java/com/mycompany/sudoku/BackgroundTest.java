@@ -41,7 +41,7 @@ public class BackgroundTest {
     }
 
     @Test
-    public void findLonleyNumberTest() {
+    public void findLonelyNumberTest() {
         Gamefield gf = new Gamefield();
         bg.deleteValue(1, 0, 0);
         bg.deleteValue(8, 0, 0);
@@ -52,7 +52,7 @@ public class BackgroundTest {
         bg.deleteValue(3, 0, 0);
         bg.deleteValue(2, 0, 0);
 
-        bg.findLonleyNumber(gf);
+        bg.findLonelyNumber(gf);
         System.out.println(bg.toString());
         System.out.println(gf.toString());
     }
@@ -105,9 +105,18 @@ public class BackgroundTest {
         ma.findHorizontalUniqueNumbers(spf, 0);
         System.out.println(ma.toString());
         System.out.println(spf.toString());
-//        int iteration = 0;
-//        while (spf.toString().contains("0")) {
-//
-//        }
+        int iteration = 0;
+        while (spf.toString().contains("0")) {
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    ma.findQuadrantUniqueNumbers(spf,i,j);
+                    ma.findVerticalUniqueNumbers(spf,i);
+                    ma.findHorizontalUniqueNumbers(spf,j);
+                    System.out.println(spf.toString());
+                    System.out.println(ma.toString());
+                }
+            }
+            iteration++;
+        }
     }
 }
