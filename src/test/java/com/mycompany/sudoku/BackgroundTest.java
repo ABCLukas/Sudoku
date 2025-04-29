@@ -61,6 +61,7 @@ public class BackgroundTest {
     public void spielfeldScannerTest() {
         Gamefield spf = new Gamefield();
         Background ma = new Background();
+//        leicht
         spf.insertNumber(4, 0, 3);
         spf.insertNumber(8, 0, 7);
         spf.insertNumber(7, 0, 8);
@@ -100,23 +101,43 @@ public class BackgroundTest {
         spf.insertNumber(3, 8, 2);
         spf.insertNumber(4, 8, 5);
 
-        System.out.println(spf.toString());
-        ma.gamefieldScanner(spf);
-        ma.findHorizontalUniqueNumbers(spf, 0);
-        System.out.println(ma.toString());
-        System.out.println(spf.toString());
+//        int[][] sudokufeld = new int[][]{
+//                {0, 0, 0, 8, 0, 3, 0, 0, 0},
+//                {0, 0, 8, 7, 5, 0, 9, 3, 6},
+//                {5, 7, 0, 0, 0, 0, 0, 2, 0},
+//                {0, 5, 0, 0, 4, 0, 0, 0, 0},
+//                {0, 0, 9, 2, 0, 5, 3, 0, 0},
+//                {0, 0, 0, 0, 0, 1, 4, 0, 0},
+//                {8, 0, 0, 0, 0, 0, 0, 7, 0},
+//                {7, 0, 0, 5, 0, 0, 2, 0, 8},
+//                {0, 9, 0, 3, 8, 0, 0, 0, 0}
+//            };
+//        
+//        spf.setGamefield(sudokufeld);
+
+        boolean b = false;
         int iteration = 0;
-        while (spf.toString().contains("0")) {
+        while (spf.toString().contains("0")||!b) {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
-                    ma.findQuadrantUniqueNumbers(spf,i,j);
-                    ma.findVerticalUniqueNumbers(spf,i);
-                    ma.findHorizontalUniqueNumbers(spf,j);
+                    ma.gamefieldScanner(spf);
+                    ma.findLonelyNumber(spf);
+//                    ma.findQuadrantUniqueNumbers(spf, i, j);
+//                    ma.findVerticalUniqueNumbers(spf, i);
+//                    ma.findHorizontalUniqueNumbers(spf, j);
+                    System.out.println("\t\tITERATION " + iteration);
                     System.out.println(spf.toString());
                     System.out.println(ma.toString());
+                    if (!spf.toString().contains("0")) {
+                        b = true;
+                        break;
+                    }
+                    iteration++;
+                }
+                if (b) {
+                    break;
                 }
             }
-            iteration++;
         }
     }
 }

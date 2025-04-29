@@ -43,6 +43,10 @@ public class Gamefield {
     public int getValOnField(int x,int y){
         return gamefield[x][y];
     }
+
+    public void setGamefield(int[][] gamefield) {
+        this.gamefield = gamefield;
+    }
     
     /**
      *

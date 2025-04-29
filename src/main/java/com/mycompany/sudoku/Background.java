@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Background {
 
     private ArrayList<Integer>[][] background;
+//    private Gamefield gf =
 
     /**
      * Initializes The Background Class and Creates The background Array
@@ -160,12 +161,14 @@ public class Background {
                     deleteFromRow(gf.getValOnField(i, j), i);
                     deleteFromColumn(gf.getValOnField(i, j), j);
                     deleteValueFromQuadrant(gf.getValOnField(i, j), i, j);
+                    
                     resetCell(i, j);
                 }
             }
         }
     }
 
+    //SAVE POSITIONS OF UNIUE NUMBERS!!!
     public void findHorizontalUniqueNumbers(Gamefield gf, int column) {
 
         int[] numberListCounter = new int[9];
@@ -184,7 +187,6 @@ public class Background {
 
                     gf.insertNumber(num, i, column);
 
-                    gamefieldScanner(gf);
                     break;
                 }
             }
@@ -208,8 +210,6 @@ public class Background {
                 if (numberListCounter[num - 1] == 1) {
 
                     gf.insertNumber(num, row, i);
-
-                    gamefieldScanner(gf);
                     break;
                 }
             }
@@ -270,7 +270,6 @@ public class Background {
                             int num = background[i][j].get(k);
                             if (numberListCounter[num - 1] == 1) {
                                 gf.insertNumber(num, i, j);
-                                gamefieldScanner(gf);
                                 break;
                             }
                         }
