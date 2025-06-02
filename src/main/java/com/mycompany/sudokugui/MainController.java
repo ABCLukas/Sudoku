@@ -29,46 +29,69 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        spf.insertNumber(4, 0, 3);
-        spf.insertNumber(8, 0, 7);
-        spf.insertNumber(7, 0, 8);
-        spf.insertNumber(8, 1, 1);
-        spf.insertNumber(7, 1, 3);
-        spf.insertNumber(4, 1, 6);
-        spf.insertNumber(9, 1, 7);
-        spf.insertNumber(3, 2, 0);
-        spf.insertNumber(9, 2, 3);
-        spf.insertNumber(2, 2, 4);
-        spf.insertNumber(1, 2, 7);
-        spf.insertNumber(1, 3, 2);
-        spf.insertNumber(6, 3, 3);
-        spf.insertNumber(7, 3, 4);
-        spf.insertNumber(4, 3, 7);
-        spf.insertNumber(6, 4, 0);
-        spf.insertNumber(4, 4, 1);
-        spf.insertNumber(8, 4, 3);
-        spf.insertNumber(3, 4, 4);
-        spf.insertNumber(2, 4, 6);
-        spf.insertNumber(7, 4, 7);
-        spf.insertNumber(5, 4, 8);
-        spf.insertNumber(2, 5, 1);
-        spf.insertNumber(7, 5, 2);
-        spf.insertNumber(5, 5, 3);
-        spf.insertNumber(4, 5, 4);
-        spf.insertNumber(9, 5, 5);
-        spf.insertNumber(3, 5, 7);
-        spf.insertNumber(6, 6, 2);
-        spf.insertNumber(5, 6, 4);
-        spf.insertNumber(2, 6, 7);
-        spf.insertNumber(2, 7, 0);
-        spf.insertNumber(1, 7, 1);
-        spf.insertNumber(8, 7, 2);
-        spf.insertNumber(7, 7, 6);
-        spf.insertNumber(5, 8, 1);
-        spf.insertNumber(3, 8, 2);
-        spf.insertNumber(4, 8, 5);
+//        spf.insertNumber(4, 0, 3);
+//        spf.insertNumber(8, 0, 7);
+//        spf.insertNumber(7, 0, 8);
+//        spf.insertNumber(8, 1, 1);
+//        spf.insertNumber(7, 1, 3);
+//        spf.insertNumber(4, 1, 6);
+//        spf.insertNumber(9, 1, 7);
+//        spf.insertNumber(3, 2, 0);
+//        spf.insertNumber(9, 2, 3);
+//        spf.insertNumber(2, 2, 4);
+//        spf.insertNumber(1, 2, 7);
+//        spf.insertNumber(1, 3, 2);
+//        spf.insertNumber(6, 3, 3);
+//        spf.insertNumber(7, 3, 4);
+//        spf.insertNumber(4, 3, 7);
+//        spf.insertNumber(6, 4, 0);
+//        spf.insertNumber(4, 4, 1);
+//        spf.insertNumber(8, 4, 3);
+//        spf.insertNumber(3, 4, 4);
+//        spf.insertNumber(2, 4, 6);
+//        spf.insertNumber(7, 4, 7);
+//        spf.insertNumber(5, 4, 8);
+//        spf.insertNumber(2, 5, 1);
+//        spf.insertNumber(7, 5, 2);
+//        spf.insertNumber(5, 5, 3);
+//        spf.insertNumber(4, 5, 4);
+//        spf.insertNumber(9, 5, 5);
+//        spf.insertNumber(3, 5, 7);
+//        spf.insertNumber(6, 6, 2);
+//        spf.insertNumber(5, 6, 4);
+//        spf.insertNumber(2, 6, 7);
+//        spf.insertNumber(2, 7, 0);
+//        spf.insertNumber(1, 7, 1);
+//        spf.insertNumber(8, 7, 2);
+//        spf.insertNumber(7, 7, 6);
+//        spf.insertNumber(5, 8, 1);
+//        spf.insertNumber(3, 8, 2);
+//        spf.insertNumber(4, 8, 5);
+//        updateList();
 
-        updateList();
+        Button schwer = new Button("Schwer");
+        Button experte = new Button("Experte");
+        Button meister = new Button("Meister");
+        
+        schwer.setOnAction(eh -> {
+            Schwierigkeit.SCHWER.setField(spf);
+            updateList();
+        });
+        
+        experte.setOnAction(eh -> {
+            Schwierigkeit.EXPERTE.setField(spf);
+            updateList();
+        });
+        
+        meister.setOnAction(eh -> {
+            Schwierigkeit.MEISTER.setField(spf);
+            updateList();
+        });
+        
+        root.getChildren().add(schwer);
+        root.getChildren().add(experte);
+        root.getChildren().add(meister);
+
 
     }
 
